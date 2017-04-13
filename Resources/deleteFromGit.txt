@@ -1,0 +1,12 @@
+Scenario 1: Delete a file from your working directory and github project.
+Use the rm {filename) command from the terminal to delete the file from your file system or delete using the file explorer for your operating system.
+Then git add, commmit & push.
+The file will remain in your local and remote repository history and can be recovered using git revert.
+
+Scenario 2: Delete a file from your local repository and github repository project but keep the file on yur local file system.
+Use the git rm {filename) command from the terminal to delete the file from your local and remote repository but keep it on your local file system.
+Then git add, commmit & push.
+The file will remain in your local file system, local and remote repository history and can be recovered using git revert.
+
+Scenario 3 (this is drastic and should be avoided): If you push sensitive information that must be removed from local & remote repositories and from history.
+Use git filter-branch or bfg. The file remains in your local file system but is removed from your repo history and rewrites commit sha-1 hashes which has ripple effects on dependant brances and pull request. Ref:https://help.github.com/articles/removing-sensitive-data-from-a-repository/
