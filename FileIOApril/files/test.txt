@@ -1,0 +1,2 @@
+Garfield,Tabby,40
+Charlie,tabby,3
