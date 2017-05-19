@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.gc.libterm.dto.BookDto" table="libitems" schema="LibraryTerm">
+
+        <id name="bookid">
+            <column name="bookid" sql-type="int(11)"></column>
+        </id>
+
+        <property name="author">
+            <column name="author" sql-type="varchar(45)" length="45"></column>
+        </property>
+
+        <property name="title">
+            <column name="title" sql-type="varchar(45)" length="45"></column>
+        </property>
+
+        <property name="status">
+            <column name="status" sql-type="varchar(45)" length="45"></column>
+        </property>
+
+        <property name="dueDate">
+            <column name="dueDate" sql-type="date"></column>
+        </property>
+
+        <property name="thumbURL">
+            <column name="thumbURL" sql-type="varchar(255)" length="255"></column>
+        </property>
+    </class>
+</hibernate-mapping>
