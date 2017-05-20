@@ -16,7 +16,7 @@
 <body>
 
 <h1>Add a new book</h1>
-<form:form action="/LibTermSpring/addbook" modelAttribute="command" method="get">
+<form:form action="${pageContext.request.contextPath}/addbook" modelAttribute="command" method="get">
 
     <label>Author</label>
     <form:input type="text" name="title" path="title"/><form:errors path="title" cssClass="error"/><br>
@@ -30,7 +30,7 @@
     <button type="submit">Add Book</button>
 </form:form>
 <h2>Search for Books</h2>
-<form action="/LibTermSpring/search" method="get">
+<form action="${pageContext.request.contextPath}/search" method="get">
     <label>Search Text</label>
     <input type="text" name="searchtxt">
     <button type="submit" name="mode" value="authorsearch">Search by Author</button>
@@ -60,10 +60,10 @@
             <td>${books.author}</td>
             <c:choose>
                 <c:when test="${books.status == true}">
-                    <td><input type="checkbox" onchange="checkOut(this,${books.bookid})" checked><div id="${books.bookid}">Checked Out</div></td>
+                    <td><input type="checkbox" onchange="checkOut(this,${books.bookid}, '${pageContext.request.contextPath}')" checked><div id="${books.bookid}">Checked Out</div></td>
                 </c:when>
                 <c:otherwise>
-                    <td><input type="checkbox" onchange="checkOut(this,${books.bookid})"><div id="${books.bookid}">Checked In</div></td>
+                    <td><input type="checkbox" onchange="checkOut(this,${books.bookid}, '${pageContext.request.contextPath}')"><div id="${books.bookid}">Checked In</div></td>
                 </c:otherwise>
             </c:choose>
 
@@ -74,38 +74,7 @@
 
 </table>
 
-<script src="//code.jquery.com/jquery-2.2.1.js"></script>
-<script type="text/javascript">
-    /*
-    * Send request to checkout controller to modify the book status
-     */
-    function checkOut(element, id){
+<script src="//code.jquery.com/jquery-2.2.1.js"></script><script src="${pageContext.request.contextPath}/resources/js/home.js"></script>
 
-        var status = element.checked;
-        if(status){//dynamically change checkbox label text
-            $("#" + id).html("Checked Out");
-        }else{
-            $("#" + id).html("Checked In");
-            $("#due" + id).html("");
-        }
-        //update status in database - using ajax post request
-        var url = "/LibTermSpring/checkout";
-        $.post(url, {status:status, id:id}, function(data){
-            //process response
-            $("#due" + id).html(getDateString(data.dueDate));
-        });
-    }
-
-    /*
-    * Convert date to standard date string for display in view
-     */
-    function getDateString(data) {
-        var date = ""
-        if(data){
-            date = (new Date(data)).toDateString();
-        }
-        return date;
-    }
-</script>
 </body>
 </html>

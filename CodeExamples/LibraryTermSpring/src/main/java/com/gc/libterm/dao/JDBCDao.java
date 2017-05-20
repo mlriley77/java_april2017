@@ -2,7 +2,10 @@ package com.gc.libterm.dao;
 
 import com.gc.libterm.dto.BookDto;
 import com.gc.libterm.dto.LibraryItemDto;
+import org.hibernate.cfg.Configuration;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,10 +21,10 @@ import static java.sql.DriverManager.getConnection;
 public class JDBCDao implements Dao{
 
     private static final String JDBC_MYSQL_DRIVER_STRING = "com.mysql.jdbc.Driver";
-    private static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/LibraryTerm";
+    private String CONNECTION_URL = "";
     private static final String LIBRARYLIST_SQL = "SELECT * FROM libitems";
-    private static final String USERNAME = "grant";
-    private static final String PWD = "chirpus";
+    private String USERNAME = "";
+    private String PWD = "";
     private static final String GET_BY_AUTHOR_SQL = "SELECT * FROM libitems WHERE author LIKE concat('%', ?,'%')";
     private static final String GET_BY_TITLE_KEYWORD_SQL = "SELECT * FROM libitems WHERE title LIKE concat('%', ?, '%')";
     private static final String GET_ITEM_BY_ID_SQL = "SELECT * FROM libitems WHERE bookid = ?";
@@ -31,9 +34,22 @@ public class JDBCDao implements Dao{
     public JDBCDao() {
         //1. Load jdbc driver
         try {
+            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+            URI uri = new URI(System.getProperty("DATABASE_URL"));//Database URL stored in environment variable for Tomcat AWS environments
+            //URI uri = new URI(System.getenv("DATABASE_URL"));//Database URL stored in environment variable for Java SE environments
+
+            String[] userInfo = uri.getUserInfo().split(":");// get username and
+            // password from
+            // uri string
+            USERNAME = userInfo[0];
+            PWD = userInfo[1];
+            CONNECTION_URL = "jdbc:mysql://" + uri.getHost() + ":" + uri.getPort() + uri.getPath();//Use this part to run locally + "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
+
             Class.forName(JDBC_MYSQL_DRIVER_STRING);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();//TODO replace with write to log statement
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
     }
 

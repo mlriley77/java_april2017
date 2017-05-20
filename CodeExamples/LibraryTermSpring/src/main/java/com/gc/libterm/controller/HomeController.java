@@ -77,7 +77,6 @@ public class HomeController {
      */
     @RequestMapping(value = "/checkout", method = RequestMethod.POST, produces="application/json")
     public @ResponseBody String checkOut(@RequestParam("status") boolean status, @RequestParam("id") int id){
-        System.out.println("/checkout");
 
         Library lib = new Library();
 
@@ -88,10 +87,11 @@ public class HomeController {
         }else{//set status to checked in = false
             libItem = lib.checkInBook(id);
         }
+
         //convert to json string
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonOutput = gson.toJson(libItem);
-        //System.out.println(jsonOutput);
+
         return jsonOutput;
     }
 }

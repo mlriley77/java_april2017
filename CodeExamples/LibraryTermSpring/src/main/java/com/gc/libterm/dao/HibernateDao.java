@@ -3,11 +3,11 @@ package com.gc.libterm.dao;
 
 import com.gc.libterm.dto.BookDto;
 import com.gc.libterm.dto.LibraryItemDto;
+import com.gc.libterm.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
 import java.text.DateFormat;
@@ -15,34 +15,33 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by maurice on 5/10/17.
  */
 public class HibernateDao implements Dao {
 
-    private Configuration config;
+    //private Configuration config;
+    private static SessionFactory sessionFactory;
 
     public HibernateDao() {
-       //this.config = new Configuration().configure("hibernate.cfg.xml");
+        sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     public ArrayList<LibraryItemDto> getLibraryItemList() {
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
-
-        SessionFactory sessionFactory = config.buildSessionFactory();
+        //Configuration config = new Configuration().configure("hibernate.cfg.xml");
+        //SessionFactory sessionFactory = config.buildSessionFactory();
 
         Session session = sessionFactory.openSession();
 
-        Transaction tx = session.beginTransaction();
+        session.beginTransaction();
         Criteria crit = session.createCriteria(BookDto.class);
 
         ArrayList<LibraryItemDto> list = (ArrayList<LibraryItemDto>)crit.list();
 
-        tx.commit();
-        session.close();
-        sessionFactory.close();
+        session.getTransaction().commit();
+        //tx.commit();
+        //session.close();
         return list;
     }
 
@@ -51,9 +50,8 @@ public class HibernateDao implements Dao {
     * Return books by the specified author
      */
     public ArrayList<LibraryItemDto> getLibraryItemByAuthor(String author) {
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
-
-        SessionFactory sessionFactory = config.buildSessionFactory();
+        //Configuration config = new Configuration().configure("hibernate.cfg.xml");
+        //SessionFactory sessionFactory = config.buildSessionFactory();
 
         Session session = sessionFactory.openSession();
 
@@ -63,9 +61,9 @@ public class HibernateDao implements Dao {
 
         ArrayList<LibraryItemDto> list = (ArrayList<LibraryItemDto>)crit.list();
 
-        tx.commit();
-        session.close();
-        sessionFactory.close();
+        session.getTransaction().commit();
+        //tx.commit();
+        //session.close();
         return list;
     }
 
@@ -73,9 +71,8 @@ public class HibernateDao implements Dao {
     * Return books with the specified title keyword
      */
     public ArrayList<LibraryItemDto> getLibraryItemByTitle(String titleKeyWord) {
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
-
-        SessionFactory sessionFactory = config.buildSessionFactory();
+        //Configuration config = new Configuration().configure("hibernate.cfg.xml");
+        //SessionFactory sessionFactory = config.buildSessionFactory();
 
         Session session = sessionFactory.openSession();
 
@@ -85,17 +82,16 @@ public class HibernateDao implements Dao {
 
         ArrayList<LibraryItemDto> list = (ArrayList<LibraryItemDto>)crit.list();
 
-        tx.commit();
-        session.close();
-        sessionFactory.close();
+        session.getTransaction().commit();
+        //tx.commit();
+        //session.close();
         return list;
     }
 
 
     public LibraryItemDto getLibraryItemById(int itemId) {
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
-
-        SessionFactory sessionFactory = config.buildSessionFactory();
+        //Configuration config = new Configuration().configure("hibernate.cfg.xml");
+        //SessionFactory sessionFactory = config.buildSessionFactory();
 
         Session session = sessionFactory.openSession();
 
@@ -105,17 +101,16 @@ public class HibernateDao implements Dao {
 
         ArrayList<LibraryItemDto> list = (ArrayList<LibraryItemDto>)crit.list();
 
-        tx.commit();
-        session.close();
-        sessionFactory.close();
+        session.getTransaction().commit();
+        //tx.commit();
+        //session.close();
         return list.get(0);
     }
 
 
     public LibraryItemDto checkOutBook(int itemId, boolean status, int dueDateOffSet) {
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
-
-        SessionFactory sessionFactory = config.buildSessionFactory();
+        //Configuration config = new Configuration().configure("hibernate.cfg.xml");
+        //SessionFactory sessionFactory = config.buildSessionFactory();
 
         Session session = sessionFactory.openSession();
 
@@ -142,9 +137,9 @@ public class HibernateDao implements Dao {
 
         session.update(bookDto);
 
-        tx.commit();
-        session.close();
-        sessionFactory.close();
+        session.getTransaction().commit();
+        //tx.commit();
+        //session.close();
 
         return bookDto;
     }
@@ -154,17 +149,16 @@ public class HibernateDao implements Dao {
     * Add book to DB table
      */
     public void addItem(LibraryItemDto item) {
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
-
-        SessionFactory sessionFactory = config.buildSessionFactory();
+        //Configuration config = new Configuration().configure("hibernate.cfg.xml");
+        //SessionFactory sessionFactory = config.buildSessionFactory();
 
         Session session = sessionFactory.openSession();
 
         Transaction tx = session.beginTransaction();
         session.save(item);
 
-        tx.commit();
-        session.close();
-        sessionFactory.close();
+        session.getTransaction().commit();
+        //tx.commit();
+        //session.close();
     }
 }

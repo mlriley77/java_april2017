@@ -60,7 +60,7 @@ public class Library {
     public ArrayList<LibraryItemDto> searchByAuthor(String author) {
 
         //Dao dao = DaoFactory.getInstance(DaoFactory.JDBC);
-        Dao dao = DaoFactory.getInstance(DaoFactory.JDBC);
+        Dao dao = DaoFactory.getInstance(DaoFactory.HIBERNATE);
         ArrayList<LibraryItemDto> searchResults = dao.getLibraryItemByAuthor(author);
 
         return searchResults;

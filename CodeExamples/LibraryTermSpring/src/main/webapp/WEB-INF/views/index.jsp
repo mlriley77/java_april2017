@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
-<a href="/LibTermSpring/home">Home Page (Non-Bootstrap version)</a><br>
-<a href="/LibTermSpring/homeboot">Home Page (Bootstrap version)</a><br>
-<a href="/LibTermSpring/homeboottheme">Home Page (Bootstrap Theme version)</a>
+<a href="${pageContext.request.contextPath}/home">Home Page (Non-Bootstrap version)</a><br>
+<a href="${pageContext.request.contextPath}/homeboot">Home Page (Bootstrap version)</a><br>
+<a href="${pageContext.request.contextPath}/homeboottheme">Home Page (Bootstrap Theme version)</a>
 </body>
 </html>

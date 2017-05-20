@@ -28,7 +28,7 @@
                 </div>
                 <div class="panel-body">
                     <%--Ref:https://bootsnipp.com/snippets/featured/compact-login-form-bs-3--%>
-                    <form:form accept-charset="UTF-8" role="form" action="/LibTermSpring/addbookboot" modelAttribute="command" method="get">
+                    <form:form accept-charset="UTF-8" role="form" action="${pageContext.request.contextPath}/addbookboot" modelAttribute="command" method="get">
                         <fieldset>
                             <div class="form-group">
                                 <label>Title</label>
@@ -58,7 +58,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                            <form action="/LibTermSpring/searchboot" method="get">
+                            <form action="${pageContext.request.contextPath}/searchboot" method="get">
                                 <div class="form-group">
                                     <label for="searchtxt" class="col-sm-2 control-label">Search Text</label>
                                     <div class="col-sm-10">
@@ -89,11 +89,11 @@
                                         <div class="ckbox">
                                             <c:choose>
                                                 <c:when test="${books.status == true}">
-                                                    <input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid})" checked>
+                                                    <input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid}, '${pageContext.request.contextPath}')" checked>
                                                     <label for="checkbox${books.bookid}"></label>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid})">
+                                                    <input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid}, '${pageContext.request.contextPath}')">
                                                     <label for="checkbox${books.bookid}"></label>
                                                 </c:otherwise>
                                             </c:choose>

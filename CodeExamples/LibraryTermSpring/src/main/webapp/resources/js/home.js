@@ -11,35 +11,22 @@ $(document).ready(function () {
     $('.ckbox label').on('click', function () {
         $(this).parents('tr').toggleClass('selected');
     });
-
-   /* $('.btn-filter').on('click', function () {
-        var $target = $(this).data('target');
-        if ($target != 'all') {
-            $('.table tr').css('display', 'none');
-            $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
-        } else {
-            $('.table tr').css('display', 'none').fadeIn('slow');
-        }
-    });
-*/
 });
 
 /*
  * Send request to checkout controller to modify the book status
  */
-function checkOut(element, id){
-
+function checkOut(element, id, urlString){
     var status = element.checked;
     if(status){//dynamically change checkbox label text
-        $("#" + id).empty();//.html("Due Date:");
-        $("#" + id).prepend("Due Date:");//.html("Due Date:");
+        $("#" + id).html("Due Date:");
     }else{
-        $("#" + id).empty();//clear old data;
-        $("#" + id).prepend("Checked In");
+        $("#" + id).html("Checked In");
         $("#due" + id).html("");
     }
     //update status in database - using ajax post request
-    var url = "/LibTermSpring/checkout";
+
+    var url = urlString + "/checkout";
     $.post(url, {status:status, id:id}, function(data){
         //process response
         $("#due" + id).append(getDateString(data.dueDate));

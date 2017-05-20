@@ -95,7 +95,7 @@
                 <div class="col-lg-12">
                     <h1>Library Terminal <small>Bootstrap Template Demo</small></h1>
                     <div class="alert alert-dismissable alert-success">
-                        <form action="/LibTermSpring/searchboottheme" method="get">
+                        <form action="${pageContext.request.contextPath}/searchboottheme" method="get">
                          <div class="form-group input-group">
                             <input type="text" class="form-control" id="searchtxt" name="searchtxt" placeholder="Book Author or Title Keyword">
                             <span class="input-group-btn">
@@ -189,10 +189,10 @@
                     <td role="gridcell" tabindex="-1" class="sui-cell">
                         <c:choose>
                             <c:when test="${books.status == true}">
-                                <div class="checkbox"><input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid})" checked></div>
+                                <div class="checkbox"><input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid}, '${pageContext.request.contextPath}')" checked></div>
                             </c:when>
                             <c:otherwise>
-                                <div class="checkbox"><input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid})"></div>
+                                <div class="checkbox"><input type="checkbox" id="checkbox${books.bookid}" onchange="checkOut(this,${books.bookid}, '${pageContext.request.contextPath}')"></div>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -233,7 +233,7 @@
                         <div class="panel-body feed">
 		              <%--<form role="form">--%>
                     <%--Ref:https://bootsnipp.com/snippets/featured/compact-login-form-bs-3--%>
-                    <form:form accept-charset="UTF-8" role="form" action="/LibTermSpring/addbookboottheme" modelAttribute="command" method="get">
+                    <form:form accept-charset="UTF-8" role="form" action="${pageContext.request.contextPath}/addbookboottheme" modelAttribute="command" method="get">
 		                <div class="form-group has-success">
 		                    <label class="control-label">Title</label>
 		                    <input type="text" class="form-control" placeholder="title" name="title" type="title" value=""><form:errors path="title" cssClass="text-danger"/>
@@ -259,82 +259,6 @@
         </div>
     </div>
     <!-- /#wrapper -->
-
-    <script type="text/javascript">
-        jQuery(function ($) {
-            var performance = [12, 43, 34, 22, 12, 33, 4, 17, 22, 34, 54, 67],
-                visits = [123, 323, 443, 32],
-                traffic = [
-                {
-                    "Status":"<div class='checkbox'><input type='checkbox' value=''></div>", "Id": 0,
-"Cover Art": "<img class='thumbnail img-responsive' alt='Bootstrap template' src='http://www.prepbootstrap.com/Content/images/shared/houses/h9.jpg' />", "Description": "<h2 class='text-primary'>I, Robot</h2><p>By Issac Asimov</p>","Due Date": "<small class='text-muted'>2014/03/07 11:43 PM</small>"
-                },
-                {
-                    "Status": "Direct", "Id": 323, "Cover Art": 53, "Description": 23, "Due Date": 600
-                },
-                {
-                    "Status": "Direct", "Id": 323, "Cover Art": 53, "Description": 23, "Due Date": 600
-                },
-                {
-                    "Status": "Direct", "Id": 323, "Cover Art": 53, "Description": 23, "Due Date": 600
-                },
-                {
-                    "Status": "Direct", "Id": 323, "Cover Art": 53, "Description": 23, "Due Date": 600
-                }];
-
-
-            $("#shieldui-chart1").shieldChart({
-                theme: "dark",
-
-                primaryHeader: {
-                    text: "Direct"
-                },
-                exportOptions: {
-                    image: false,
-                    print: false
-                },
-                dataSeries: [{
-                    seriesType: "area",
-                    collectionAlias: "Q Data",
-                    data: performance
-                }]
-            });
-
-            $("#shieldui-chart2").shieldChart({
-                theme: "dark",
-                primaryHeader: {
-                    text: "Traffic Per week"
-                },
-                exportOptions: {
-                    image: false,
-                    print: false
-                },
-                dataSeries: [{
-                    seriesType: "pie",
-                    collectionAlias: "traffic",
-                    data: visits
-                }]
-            });
-
-          /*  $("#shieldui-grid1").shieldGrid({
-                dataSource: {
-                    data: traffic
-                },
-                sorting: {
-                    multiple: true
-                },
-                rowHover: false,
-                paging: false,
-                columns: [
-                { field: "Status", width: "60px", title: "Status" },
-                { field: "Id", width: "60px", title: "Id" },                
-                { field: "Cover Art", title: "Cover Art" },
-                { field: "Description", title: "Description" },
-		{ field: "Due Date", title: "Due Date" }
-                ]
-            });   */         
-        });        
-    </script>
 
     <script src="${pageContext.request.contextPath}/resources/js/home.js"></script>
 </body>
