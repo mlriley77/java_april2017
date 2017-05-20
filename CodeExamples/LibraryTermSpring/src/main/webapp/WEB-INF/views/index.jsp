@@ -11,7 +11,8 @@
     <title>Title</title>
 </head>
 <body>
+<a href="/LibTermSpring/home">Home Page (Non-Bootstrap version)</a><br>
 <a href="/LibTermSpring/homeboot">Home Page (Bootstrap version)</a><br>
-<a href="/LibTermSpring/home">Home Page (Non-Bootstrap version)</a>
+<a href="/LibTermSpring/homeboottheme">Home Page (Bootstrap Theme version)</a>
 </body>
 </html>

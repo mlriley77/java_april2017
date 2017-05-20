@@ -31,16 +31,18 @@ function checkOut(element, id){
 
     var status = element.checked;
     if(status){//dynamically change checkbox label text
-        $("#" + id).html("Due Date:");
+        $("#" + id).empty();//.html("Due Date:");
+        $("#" + id).prepend("Due Date:");//.html("Due Date:");
     }else{
-        $("#" + id).html("Checked In");
+        $("#" + id).empty();//clear old data;
+        $("#" + id).prepend("Checked In");
         $("#due" + id).html("");
     }
     //update status in database - using ajax post request
     var url = "/LibTermSpring/checkout";
     $.post(url, {status:status, id:id}, function(data){
         //process response
-        $("#due" + id).html(getDateString(data.dueDate));
+        $("#due" + id).append(getDateString(data.dueDate));
     });
 }
 

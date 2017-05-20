@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>
-                                        <label>Verify Age (must be 18 or over)</label>
+                                        Verify Age (must be 18 or over)
                                         <input class="form-control" type="number" name="age" min="18" required><%--Demo of HTML5 front-end validation--%>
                                     </label>
                                 </div>
